@@ -1,12 +1,12 @@
 import Header from "./Header";
 import React from "react";
-import PostList from "./PostList";
+import PostControl from "./PostControl";
 
 function App() {
   return (
     <React.Fragment>
       <Header/>
-      <PostList/>
+      <PostControl/>
     </React.Fragment>
   );
 }
