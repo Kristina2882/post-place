@@ -1,9 +1,21 @@
 import React from "react";
+import PropTypes from 'prop-types';
+import {v4} from "uuid";
 
-function NewPostForm() {
+function NewPostForm(props) {
 
     function handleNewPostFormSubmission(event) {
         event.preventDefault();
+        props.onAddingNewPost({
+            text: event.target.text.value,
+            imgUrl: event.target.imgUrl.value,
+            autor:event.target.autor.value,
+            postDate: new Date(),
+            like: 0,
+            dislike: 0,
+            id: v4()
+
+        });
     }
 
     return (
@@ -25,6 +37,10 @@ function NewPostForm() {
             </form>
         </React.Fragment>
     );
+}
+
+NewPostForm.propTypes = {
+    onAddingNewPost: PropTypes.func
 }
 
 export default NewPostForm;
