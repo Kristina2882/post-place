@@ -2,6 +2,8 @@ import React from "react";
 import NewPostForm from "./NewPostForm";
 import PostList from "./PostList";
 import PostDetail from "./PostDetail";
+import {connect} from 'react-redux';
+import PropTypes from 'prop-types';
 
 class PostControl extends React.Component {
 
@@ -9,7 +11,6 @@ class PostControl extends React.Component {
     super(props);
     this.state = {
         formVisible: false, 
-        mainPostList: [],
         selectedPost: null
     };
 }
@@ -29,38 +30,61 @@ class PostControl extends React.Component {
     }
 
     handleAddNewPost = (newPost) => {
-        const newMainPostList = this.state.mainPostList.concat(newPost);
+        const {dispatch} = this.props;
+        const {text, imgUrl, autor, like, dislike, postDate, id} = newPost;
+        const action = {
+            type: 'ADD_POST',
+            text: text,
+            imgUrl: imgUrl,
+            autor: autor, 
+            like: like,
+            dislike: dislike,
+            postDate: postDate,
+            id: id
+        }
+        dispatch(action);
         this.setState({
-           formVisible: false,
-           mainPostList: newMainPostList
+           formVisible: false
         });
     }
     
     handleChangeSelectedPost = (id) => {
-        const newSelectedPost = this.state.mainPostList.filter(post => post.id === id)[0];
+        const newSelectedPost = this.props.mainPostList[id];
         this.setState({
             selectedPost: newSelectedPost
         });
     }
 
     handleLikeClick = (id) => {
-        let updatedPost = this.state.mainPostList.filter(post => post.id === id)[0];
-        const likes = updatedPost.like + 1;
-        updatedPost.like = likes;
-        let newMainPostList = this.state.mainPostList.filter(post => post.id !== id)
-                              .concat(updatedPost);
-        this.setState({
-            mainPostList: newMainPostList
-        });
+       const {dispatch} = this.props;
+       const {text, imgUrl, autor, like, dislike, postDate} = this.props.mainPostList[id];
+       const action = {
+           type: 'ADD_POST',
+           text: text,
+           imgUrl: imgUrl,
+           autor: autor, 
+           like: like + 1,
+           dislike: dislike,
+           postDate: postDate,
+           id: id
+       }
+       dispatch(action);
     }
 
     handleDislikeClick = (id) => {
-        let updatedPost = this.state.mainPostList.filter(post => post.id === id)[0];
-        updatedPost.dislike +=1;
-        let newMainPostList = this.state.mainPostList.filter(post => post.id !== id).concat(updatedPost);
-        this.setState({
-         mainPostList: newMainPostList
-        });
+        const {dispatch} = this.props;
+        const {text, imgUrl, autor, like, dislike, postDate} = this.props.mainPostList[id];
+        const action = {
+            type: 'ADD_POST',
+            text: text,
+            imgUrl: imgUrl,
+            autor: autor, 
+            like: like,
+            dislike: dislike + 1,
+            postDate: postDate,
+            id: id
+        }
+        dispatch(action);
     }
 
     render() {
@@ -75,7 +99,7 @@ class PostControl extends React.Component {
           buttonText="To the posts";
         }
         else {
-          currentlyVisible = <PostList postList = {this.state.mainPostList} onPostSelection={this.handleChangeSelectedPost} onLikeClick={this.handleLikeClick} onDislikeClick={this.handleDislikeClick}/>
+          currentlyVisible = <PostList postList = {this.props.mainPostList} onPostSelection={this.handleChangeSelectedPost} onLikeClick={this.handleLikeClick} onDislikeClick={this.handleDislikeClick}/>
           buttonText="Create post";
         }
         return (
@@ -87,4 +111,16 @@ class PostControl extends React.Component {
     }
 }
 
+PostControl.propTypes = {
+    mainPostList: PropTypes.object
+}
+const mapStateToProps = state => {
+
+    return {
+        mainPostList: state
+    }
+}
+PostControl = connect(mapStateToProps)(PostControl);
+
 export default PostControl;
+

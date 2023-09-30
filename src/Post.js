@@ -11,7 +11,8 @@ function Post(props) {
         <div onClick={() => props.whenPostClicked(props.id)}>
         <h3>{props.text}</h3>
         <img src={props.imgUrl} style={myStyle}/>
-        <h5><em>Autor: {props.autor} | Date: {props.postDate.toDateString()} | 🧡 : {props.like} 🤢 : {props.dislike}</em></h5>
+        <h5>Autor: {props.autor} </h5>
+        <h5><em>Autor: {props.autor} | Date: {props.postDate.toDateString()} | 🧡 : {props.like} 🤢 : {props.dislike}</em></h5> 
         </div>
         <button onClick={() => props.whenLikeClicked(props.id)}>Like!</button> <button onClick={() => props.whenDislikeClicked(props.id)}>No!</button>
      </React.Fragment>
