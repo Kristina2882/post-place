@@ -1,4 +1,4 @@
-const reducer = (state = {}, action) => {
+const reducer = (state = null, action) => {
     const {id} = action;
     switch (action.type) {
         case 'SELECT_POST':

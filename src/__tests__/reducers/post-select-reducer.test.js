@@ -23,7 +23,7 @@ describe('postSelectReducer', () => {
 
 }
     test('should return the default state if the action is null', () => {
-        expect(postSelectReducer({}, {type: null})).toEqual({});
+        expect(postSelectReducer(null, {type: null})).toEqual(null);
     });
     test('should return the post selected by id', () => {
         action = {
