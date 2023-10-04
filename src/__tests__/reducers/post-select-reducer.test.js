@@ -39,4 +39,11 @@ describe('postSelectReducer', () => {
                 id: 2
         });
     });
+    test('should return null if the id is not correct', () => {
+        action = {
+            type: 'SELECT_POST',
+            id: 3
+        }
+        expect(postSelectReducer(postData, action)).toEqual(null);
+    });
 });
