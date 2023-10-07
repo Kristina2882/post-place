@@ -16,7 +16,7 @@ describe('postListReducer', () =>  {
     });
 
     test('should add new post to the post list', () => {
-     const {text, imgUrl, autor, like, dislike, id } = postData;
+     const {text, imgUrl, autor, like, dislike, postDate, id } = postData;
      action = {
         type: 'ADD_POST',
         text: text,
@@ -32,6 +32,8 @@ describe('postListReducer', () =>  {
         imgUrl: imgUrl, 
         autor: autor,
         like: like,
+        dislike: dislike,
+        postDate: postDate,
         id: id
         }
      });

@@ -4,13 +4,14 @@ import PostList from "./PostList";
 import PostDetail from "./PostDetail";
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
+import { Button } from "react-bootstrap";
 
 class PostControl extends React.Component {
 
     constructor(props) {
     super(props);
     this.state = {
-        formVisible: false, 
+        formVisible: false,
         selectedPost: null
     };
 }
@@ -49,15 +50,17 @@ class PostControl extends React.Component {
     }
     
     handleChangeSelectedPost = (id) => {
-        const newSelectedPost = this.props.mainPostList[id];
-        this.setState({
-            selectedPost: newSelectedPost
-        });
+     const selectedPost = this.props.mainPostList[id];
+     this.setState({
+     selectedPost: selectedPost
+     });
     }
 
     handleLikeClick = (id) => {
        const {dispatch} = this.props;
-       const {text, imgUrl, autor, like, dislike, postDate} = this.props.mainPostList[id];
+       const postToLike = this.props.mainPostList[id];
+       console.log(postToLike);
+       const {text, imgUrl, autor, like, dislike, postDate} = postToLike;
        const action = {
            type: 'ADD_POST',
            text: text,
@@ -90,10 +93,10 @@ class PostControl extends React.Component {
     render() {
         let currentlyVisible = null;
         let buttonText = null;
-        if (this.state.selectedPost !== null) {
+        if  (this.state.selectedPost !== null) {
             currentlyVisible = <PostDetail post={this.state.selectedPost}/>
-            buttonText="To the posts";
-        }
+             buttonText="To the posts";
+          }
         else if (this.state.formVisible) {
           currentlyVisible = <NewPostForm onAddingNewPost ={this.handleAddNewPost}/>
           buttonText="To the posts";
@@ -104,7 +107,7 @@ class PostControl extends React.Component {
         }
         return (
         <React.Fragment>
-         <button onClick={this.handleClick}>{buttonText}</button>
+         <Button onClick={this.handleClick}>{buttonText}</Button>
          {currentlyVisible}
         </React.Fragment>
         );
@@ -115,9 +118,30 @@ PostControl.propTypes = {
     mainPostList: PropTypes.object
 }
 const mapStateToProps = state => {
+    
+    console.log(typeof(state.mainPostList));
+    let rateArray = [];
+    Object.values(state.mainPostList).forEach((post) =>  {
+     post['rate'] = post.like - post.dislike;
+     rateArray.push(post);
+    }
+    );
 
+    let sorted = rateArray.sort((a,b) => b.rate - a.rate);
+
+    const arrayToObject  = (array, id) => {
+        const initialValue = {};
+        return array.reduce((obj, item) => {
+          return {
+            ...obj, 
+            [item[id]] : item,
+          };
+        }, initialValue);
+    };
+
+    let newPostList = arrayToObject(sorted, 'id');
     return {
-        mainPostList: state
+        mainPostList: newPostList
     }
 }
 PostControl = connect(mapStateToProps)(PostControl);

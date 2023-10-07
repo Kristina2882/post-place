@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from 'prop-types';
+import { Button } from "react-bootstrap";
 
 function Post(props) {
     const myStyle = {
@@ -11,10 +12,9 @@ function Post(props) {
         <div onClick={() => props.whenPostClicked(props.id)}>
         <h3>{props.text}</h3>
         <img src={props.imgUrl} style={myStyle}/>
-        <h5>Autor: {props.autor} </h5>
-        <h5><em>Autor: {props.autor} | Date: {props.postDate.toDateString()} | 🧡 : {props.like} 🤢 : {props.dislike}</em></h5> 
+        <h5><em>By: {props.autor} | Date: {props.postDate.toDateString()} | 🧡 : {props.like} 🤢 : {props.dislike}</em></h5> 
         </div>
-        <button onClick={() => props.whenLikeClicked(props.id)}>Like!</button> <button onClick={() => props.whenDislikeClicked(props.id)}>No!</button>
+        <Button onClick={() => props.whenLikeClicked(props.id)}>Like!</Button> <Button onClick={() => props.whenDislikeClicked(props.id)}>No!</Button>
      </React.Fragment>
     );
 }

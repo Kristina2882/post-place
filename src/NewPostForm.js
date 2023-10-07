@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from 'prop-types';
 import {v4} from "uuid";
+import { Button , Form} from "react-bootstrap";
 
 function NewPostForm(props) {
 
@@ -20,21 +21,25 @@ function NewPostForm(props) {
 
     return (
         <React.Fragment>
-            <form onSubmit={handleNewPostFormSubmission}>
-                <input 
+            <Form onSubmit={handleNewPostFormSubmission}>
+                <br/>
+                <Form.Control
                 type="text"
                 name="text"
                 placeholder="What do you think?"/>
-                <input 
+                <br/>
+                <Form.Control 
                 type="text"
                 name="imgUrl"
                 placeholder="Put image URL here"/>
-                <input 
+                <br/>
+                <Form.Control 
                 type="text"
                 name="autor"
                 placeholder="What'your name?"/>
-                <button type="submit">Post!</button>
-            </form>
+                <br/>
+                <Button type="submit">Post!</Button>
+            </Form>
         </React.Fragment>
     );
 }

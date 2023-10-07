@@ -10,7 +10,7 @@ function PostDetail(props) {
             <h5><em>by {post.autor}</em></h5>
             <img src={post.imgUrl}/>
              <h5>Posted on: {post.postDate.toString()}</h5>  
-            <h5>Likes: {post.like}  No! {post.dislike}</h5>
+           <h5>Likes: {post.like}  No! {post.dislike}</h5>
         </React.Fragment>
     );
 }

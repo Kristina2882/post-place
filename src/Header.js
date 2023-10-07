@@ -1,10 +1,14 @@
 import React from "react";
+import {  Row, Col } from "react-bootstrap";
 
 function Header() {
     return (
      <React.Fragment>
-        <h2>POST PLACE</h2>
-        <img src="" alt="logo"/>
+    
+            <Row>
+       <Col><h2>POST PLACE</h2></Col> 
+        <Col><img src="" alt="logo"/></Col>
+        </Row>
      </React.Fragment>
     )
 }

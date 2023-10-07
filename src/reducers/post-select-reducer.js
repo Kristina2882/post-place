@@ -1,11 +1,11 @@
-const reducer = (state = null, action) => {
+const reducer = (state = {}, action) => {
     const {id} = action;
     switch (action.type) {
         case 'SELECT_POST':
+
             const newState = {...state};
-            let selectedPost = newState[id];
-            if (selectedPost)
-            {
+            const selectedPost = newState[id];
+            if (selectedPost) {
             return selectedPost;
             }
             else {
@@ -13,7 +13,7 @@ const reducer = (state = null, action) => {
             }
 
         default:
-            return state;
+            return null;
     }
     
 }

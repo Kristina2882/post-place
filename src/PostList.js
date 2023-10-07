@@ -19,13 +19,14 @@ function PostList(props) {
      key={post.id}
      id={post.id}
      />
+    
      )}
     </React.Fragment>
     );
 }
 
 PostList.propTypes = {
-    postList: PropTypes.object,
+    postList: PropTypes.array,
     onPostSelection: PropTypes.func,
     onLikeClick: PropTypes.func,
     onDislikeClick: PropTypes.func
