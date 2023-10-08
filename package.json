@@ -4,6 +4,7 @@
   "repository": {
     "url": "git+https://github.com/Kristina2882/post-place.git"
   },
+  "homepage": "https://Kristina2882.github.io/post-place/",
   "private": false,
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
