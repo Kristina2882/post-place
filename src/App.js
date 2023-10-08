@@ -6,10 +6,13 @@ import { Container } from "react-bootstrap";
 
 
 function App() {
+
   return (
     <React.Fragment>
-      <Container fluid>
+      <Container>
+        <br/>
       <Header/>
+      <hr/>
       <PostControl/>
       </Container>
     </React.Fragment>

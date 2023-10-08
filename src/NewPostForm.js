@@ -38,7 +38,7 @@ function NewPostForm(props) {
                 name="autor"
                 placeholder="What'your name?"/>
                 <br/>
-                <Button type="submit">Post!</Button>
+                <Button type="submit" variant="outline-dark"><strong>Post!</strong></Button>
             </Form>
         </React.Fragment>
     );
